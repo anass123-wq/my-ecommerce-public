@@ -1,0 +1,37 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: r1
+          uri: http://localhost:8080/
+          predicates:
+          - Path= /Security/**
+        - id : r2
+          uri : http://localhost:8031/
+          predicates :
+            - Path= /Product-Service/**
+        - id : r3
+          uri : http://localhost:8032/
+          predicates :
+            - Path= /Sales-Order-Service/**
+        - id: r4
+          uri: http://localhost:8033/
+          predicates:
+            - Path= /Purchase-Order-Service/**
+        - id: r5
+          uri: http://localhost:8034/
+          predicates:
+            - Path= /SupplierClient-Service/**
+        - id: r6
+          uri: http://localhost:9056/
+          predicates:
+            - Path= /Filter-Service/**
+        - id: websocket-route
+          uri: ws://localhost:8033/  # عنوان WebSocket الخاص بالخدمة
+           http://localhost:8032/
+          predicates:
+            - Path=/ws/**
+          filters:
+            - name: StripPrefix
+              args:
+                parts: 1

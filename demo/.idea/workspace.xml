@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b06051f4-62a1-4892-a84b-0e435165b9d1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Filter-Service/src/main/java/com/spring/filterservice/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Filter-Service/src/main/java/com/spring/filterservice/Filter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Filter-Service/src/main/java/com/spring/filterservice/FilterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Filter-Service/src/main/java/com/spring/filterservice/FilterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gateway-Service/src/main/java/com/spring/gatewayservice/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Gateway-Service/src/main/java/com/spring/gatewayservice/GatewayConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gateway-Service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Gateway-Service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Gateway-Service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../Gateway-Service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Product-Sevice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Product-Sevice/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Product-Sevice/src/main/java/com/spring/productsevice/ProductSeviceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Product-Sevice/src/main/java/com/spring/productsevice/ProductSeviceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Product-Sevice/src/main/java/com/spring/productsevice/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Product-Sevice/src/main/java/com/spring/productsevice/controller/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Product-Sevice/src/main/java/com/spring/productsevice/product/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Product-Sevice/src/main/java/com/spring/productsevice/product/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Product-Sevice/src/main/java/com/spring/productsevice/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Product-Sevice/src/main/java/com/spring/productsevice/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Product-Sevice/src/main/java/com/spring/productsevice/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Product-Sevice/src/main/java/com/spring/productsevice/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Product-Sevice/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Product-Sevice/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/PurchaseOrderServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/PurchaseOrderServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/config/FeignClientSupplierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/config/FeignClientSupplierService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/config/FeignProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/config/FeignProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/config/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/config/WebSocketConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/controller/PurchaseOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/controller/PurchaseOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/controller/SalesControllerSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/controller/SalesControllerSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/dto/ProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/dto/ProductDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/dto/PurchaseLineDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/dto/PurchaseLineDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/dto/PurchaseOrderDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/dto/PurchaseOrderDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/dto/SupplierClientDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/dto/SupplierClientDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/model/PaymentStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/model/PaymentStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/model/PurchaseLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/model/PurchaseLine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/model/PurchaseOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/model/PurchaseOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/repository/PurchaseLineRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/repository/PurchaseLineRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/repository/PurchaseOrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/repository/PurchaseOrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/repository/SupplierClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/repository/SupplierClientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/service/PurchaseOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/java/com/spring/purchaseorderservice/service/PurchaseOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Purchase-Order-Service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/SalesOrderServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/SalesOrderServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/config/FeignClientSupplierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/config/FeignClientSupplierService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/config/FeignProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/config/FeignProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/config/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/config/WebSocketConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/controller/SalesControllerSocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/controller/SalesControllerSocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/controller/SalesOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/controller/SalesOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/dto/SalesLineDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/dto/SalesLineDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/dto/SalesOrderDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/dto/SalesOrderDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/model/PaymentStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/model/PaymentStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/model/SalesLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/model/SalesLine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/model/SalesOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/model/SalesOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/model/SupplierClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/model/SupplierClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/repository/SalesLineRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/repository/SalesLineRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/repository/SalesOrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/repository/SalesOrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/service/SalesOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/java/com/spring/salesorderservice/service/SalesOrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Sales-Order-Service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../Sales-Order-Service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/config/ApplicationConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/config/ApplicationConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/config/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/controller/AccountController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/controller/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/controller/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/controller/RoleController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/dto/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/dto/LoginResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/dto/LoginUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/dto/LoginUserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/dto/RegisterUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/dto/RegisterUserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/jwt/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/jwt/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/model/AdminSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/model/AdminSetup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/model/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/repository/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/repository/RoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/service/AccountService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/service/AuthService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/service/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/service/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/service/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/service/RoleService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Security-Service/src/main/java/com/spring/securityservice/service/UserServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SupplierClient-Service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SupplierClient-Service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SupplierClient-Service/src/main/java/com/spring/supplierclientservice/SupplierClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SupplierClient-Service/src/main/java/com/spring/supplierclientservice/SupplierClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SupplierClient-Service/src/main/java/com/spring/supplierclientservice/SupplierClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SupplierClient-Service/src/main/java/com/spring/supplierclientservice/SupplierClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SupplierClient-Service/src/main/java/com/spring/supplierclientservice/SupplierClientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SupplierClient-Service/src/main/java/com/spring/supplierclientservice/SupplierClientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SupplierClient-Service/src/main/java/com/spring/supplierclientservice/SupplierClientService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SupplierClient-Service/src/main/java/com/spring/supplierclientservice/SupplierClientService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SupplierClient-Service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../SupplierClient-Service/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;anass123-wq&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/anass123-wq/my-ecommerce-public.git&quot;,
+    &quot;accountId&quot;: &quot;c1210508-6bc9-46f4-8bd9-51b937368d5f&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2oaNj0O72Ja1LOoTN75RsCtOTpo" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "#1 on mainPublic-2",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/PC_Tarik/IdeaProjects/demo",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "configurable.group.appearance",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b06051f4-62a1-4892-a84b-0e435165b9d1" name="Changes" comment="" />
+      <created>1731103858304</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731103858304</updated>
+      <workItem from="1731103859346" duration="112000" />
+      <workItem from="1731104037554" duration="667000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

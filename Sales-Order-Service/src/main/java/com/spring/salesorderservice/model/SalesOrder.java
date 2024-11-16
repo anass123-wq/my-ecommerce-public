@@ -1,12 +1,15 @@
 package com.spring.salesorderservice.model;
 
-import com.spring.salesorderservice.dto.SupplierClientDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,12 +21,11 @@ public class SalesOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    private SupplierClient customer;
     private double totalAmount;
-    private boolean isPaid;
-
-    @OneToMany(mappedBy = "salesOrder", cascade = CascadeType.ALL)
-    private List<SalesLine> salesLines = new ArrayList<>();
+    private String customer;
+    private Date date;
+    private PaymentStatus paymentStatus;
+    @OneToMany(mappedBy = "salesOrder",cascade = CascadeType.ALL)
+    private List<SalesLine> salesLines = new ArrayList<>(); ;
 
 }
