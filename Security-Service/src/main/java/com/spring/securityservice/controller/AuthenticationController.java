@@ -1,16 +1,15 @@
-package com.spring.securityservice;
+package com.spring.securityservice.controller;
 
+import com.spring.securityservice.dto.LoginResponse;
 import com.spring.securityservice.dto.LoginUserDto;
 import com.spring.securityservice.dto.RegisterUserDto;
 import com.spring.securityservice.model.User;
 import com.spring.securityservice.service.AuthenticationService;
 import com.spring.securityservice.service.JwtService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = {"http://localhost:3004" ,"http://localhost:3006" ,"http://localhost:3007" ,"http://localhost:3008", "http://localhost:3003","http://localhost:3000","http://localhost:3005"})
 @RequestMapping("/auth")
 @RestController
 public class AuthenticationController {
@@ -32,11 +31,14 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserDto loginUserDto) {
+        System.out.println(loginUserDto);
         User authenticatedUser = authenticationService.authenticate(loginUserDto);
 
         String jwtToken = jwtService.generateToken(authenticatedUser);
 
-        LoginResponse loginResponse = new LoginResponse().setToken(jwtToken).setExpiresIn(jwtService.getExpirationTime());
+        LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setToken(jwtToken);
+        loginResponse.setExpiresIn(jwtService.getExpirationTime());
 
         return ResponseEntity.ok(loginResponse);
     }

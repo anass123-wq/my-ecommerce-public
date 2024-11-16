@@ -1,2 +1,9 @@
-package com.spring.purchaseorderservice.repository;public interface SupplierClientRepository {
+package com.spring.purchaseorderservice.repository;
+
+import com.spring.purchaseorderservice.model.SupplierClient;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface SupplierClientRepository extends JpaRepository<SupplierClient, Long> {
 }

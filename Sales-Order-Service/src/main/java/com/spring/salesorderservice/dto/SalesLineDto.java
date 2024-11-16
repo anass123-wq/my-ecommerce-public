@@ -1,6 +1,8 @@
 package com.spring.salesorderservice.dto;
 
 import com.spring.salesorderservice.model.SalesOrder;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -9,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class SalesLineDto {
-    private Long id;
     private int quantity;
     private double price;
-    private SalesOrder salesOrder;
-
     private Long productId;
 }
