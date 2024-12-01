@@ -11,7 +11,7 @@ public interface FeignClientSupplierService {
     @Bean
     public default RequestInterceptor feignRequestInterceptor() {
         return requestTemplate -> {
-            String serviceName = "SalesService"; ً
+            String serviceName = "SalesService";
             requestTemplate.header("Source-Service", serviceName);
 
         };

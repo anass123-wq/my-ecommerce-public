@@ -9,7 +9,6 @@ import com.spring.purchaseorderservice.model.PurchaseLine;
 import com.spring.purchaseorderservice.model.PurchaseOrder;
 import com.spring.purchaseorderservice.repository.PurchaseLineRepository;
 import com.spring.purchaseorderservice.repository.PurchaseOrderRepository;
-import com.spring.purchaseorderservice.repository.SupplierClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
