@@ -28,8 +28,6 @@ public class PurchaseOrderService {
     private FeignProductService feignProductService;
     @Autowired
     FeignClientSupplierService feignClientSupplierService;
-    @Autowired
-    SupplierClientRepository supplierClientRepository;
     @Transactional
     public PurchaseOrder createPurchaseOrder(PurchaseOrderDto purchaseOrderDto) throws IllegalArgumentException {
         PurchaseOrder purchaseOrder = new PurchaseOrder();
