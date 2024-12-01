@@ -16,7 +16,6 @@ public class SalesControllerSocket {
 
     @PostMapping("/add")
     public String addSale(@RequestBody PurchaseOrder sale) {
-        // هنا يتم نشر بيانات المبيعات الجديدة
         template.convertAndSend("/topic/purchase", sale);
         return "added!";
     }

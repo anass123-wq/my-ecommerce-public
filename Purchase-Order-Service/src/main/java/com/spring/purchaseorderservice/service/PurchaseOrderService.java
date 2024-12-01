@@ -1,16 +1,12 @@
 package com.spring.purchaseorderservice.service;
 
-import com.spring.purchaseorderservice.Mapper.SupplierClientMapper;
 import com.spring.purchaseorderservice.config.FeignClientSupplierService;
 import com.spring.purchaseorderservice.config.FeignProductService;
-import com.spring.purchaseorderservice.dto.ProductDto;
 import com.spring.purchaseorderservice.dto.PurchaseLineDto;
 import com.spring.purchaseorderservice.dto.PurchaseOrderDto;
-import com.spring.purchaseorderservice.dto.SupplierClientDto;
 import com.spring.purchaseorderservice.model.PaymentStatus;
 import com.spring.purchaseorderservice.model.PurchaseLine;
 import com.spring.purchaseorderservice.model.PurchaseOrder;
-import com.spring.purchaseorderservice.model.SupplierClient;
 import com.spring.purchaseorderservice.repository.PurchaseLineRepository;
 import com.spring.purchaseorderservice.repository.PurchaseOrderRepository;
 import com.spring.purchaseorderservice.repository.SupplierClientRepository;
@@ -20,8 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 
 @Service
@@ -56,7 +50,9 @@ public class PurchaseOrderService {
             totalAmount += line.getPrice() * line.getQuantity();
             purchaseLineRepository.save(purchaseLine);
         }
+        feignClientSupplierService.updateTotalOrder(purchaseOrder.getSupplier() ,totalAmount);
         purchaseOrder.setTotalAmount(totalAmount);
+        purchaseOrder.setPaymentStatus(purchaseOrderDto.getPaymentStatus());
         return purchaseOrderRepository.save(purchaseOrder);
 
     }

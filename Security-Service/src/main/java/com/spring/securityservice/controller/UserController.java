@@ -8,12 +8,14 @@ import com.spring.securityservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+@PreAuthorize("hasAuthority('ADMIN')")
 @CrossOrigin(origins = {"http://localhost:3004" ,"http://localhost:3006" ,"http://localhost:3007" ,"http://localhost:3008", "http://localhost:3003","http://localhost:3000","http://localhost:3005"})
 @RestController
 @RequestMapping("/api")
@@ -92,6 +94,7 @@ public class UserController {
     public ResponseEntity<Optional<User>> getUserByUsername(@PathVariable String username) {
         return ResponseEntity.ok(userService.getUserByUsername(username));
     }
+    @PreAuthorize("hasAuthority('SEARCH')")
     @GetMapping("/search")
     public ResponseEntity<List<RegisterUserDto>> searchAccounts(@RequestParam String query) {
         List<RegisterUserDto> results = userService.searchAccounts(query);

@@ -40,16 +40,6 @@ public class SalesOrderService {
     @Transactional
     public SalesOrder createSalesOrder(SalesOrderDto salesOrderDto ) throws IllegalArgumentException {
 
-        /*SupplierClient supplierClient = feignClientSupplierService.getSupplierClientByName(purchaseOrderDto.getSupplier());
-        if (supplierClientDto == null) {
-            supplierClientDto = new SupplierClientDto();
-            supplierClientDto.setName(purchaseOrderDto.getSupplier());
-            supplierClientDto.setPhoneNumber(null);
-            supplierClientDto.setEmail(null);
-            feignClientSupplierService.saveSupplierClient(supplierClientDto);
-        }
-        SupplierClient supplierClient = supplierClientRepository.save(SupplierClientMapper.toEntity(supplierClientDto));
-       */
         SalesOrder salesOrder = new SalesOrder();
         salesOrder.setCustomer(salesOrderDto.getCustomer());
         double totalAmount = 0;
@@ -62,15 +52,17 @@ public class SalesOrderService {
 
             // Add product stock
             feignProductService.reduceStock(salesLine.getProductId(), salesLine.getQuantity());
+            feignProductService.updateDate(salesLine.getProductId(),salesOrder.getDate());
 
             salesLine.setSalesOrder(salesOrder);
             salesOrder.getSalesLines().add(salesLine);
             totalAmount += line.getPrice() * line.getQuantity();
             salesLineRepository.save(salesLine);
         }
-
+        feignClientSupplierService.updateTotalOrder(salesOrder.getCustomer(),totalAmount);
         salesOrder.setTotalAmount(totalAmount);
         salesOrder.setDate(new Date());
+        salesOrder.setPaymentStatus(salesOrderDto.getPaymentStatus());
         return salesOrderRepository.save(salesOrder);
 
     }

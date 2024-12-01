@@ -12,54 +12,44 @@ import java.util.Optional;
 @CrossOrigin(origins = {"http://localhost:3004" ,"http://localhost:3006" ,"http://localhost:3007" ,"http://localhost:3008", "http://localhost:3003","http://localhost:3000","http://localhost:3005"})
 @RestController
 @RequestMapping("/api/Filters")
-public class FilterController {
+public class FilterController{
 
     @Autowired
     private FilterService filterService;
+    @PreAuthorize("hasAuthority('CREATE')")
     @PostMapping("/{filterId}/addItem")
     public ResponseEntity<Filter> addItemToFilter(@PathVariable("filterId") Integer filterId, @RequestBody Long itemId) {
-        if (!AuthorizationClient.doesPermissionExist("ROLE_VIEW_PRODUCTS")) {
-            throw new AccessDeniedException("Permission ROLE_VIEW_PRODUCTS does not exist.");
-        }System.out.println(itemId +" "+filterId);
+     System.out.println(itemId +" "+filterId);
         filterService.addItemToFilter(filterId, itemId);
         return ResponseEntity.ok().build();
     }
     // Get all filters
+    @PreAuthorize("hasAuthority('ROLE_VIEW_FILTER')")
     @GetMapping("/filters")
     public List<Filter> getAllFilters() {
-        if (!AuthorizationClient.doesPermissionExist("ROLE_VIEW_PRODUCTS")) {
-            throw new AccessDeniedException("Permission ROLE_VIEW_PRODUCTS does not exist.");
-        }
         return filterService.findAll();
     }
 
     // Get a filter by ID
+    @PreAuthorize("hasAuthority({'GET_ID' })")
     @GetMapping("/{id}")
     public ResponseEntity<Filter> getFilterById(@PathVariable Integer id) {
-        if (!AuthorizationClient.doesPermissionExist("")) {
-            throw new AccessDeniedException("Permission  does not exist.");
-        }
         Optional<Filter> filter = filterService.findById(id);
         return filter.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PreAuthorize("hasAuthority('ROLE_CREATE_FILTER')")
+    @PreAuthorize("hasAuthority({'CREATE','ROLE_CREATE_FILTER'})")
     // Create a new filter
     @PostMapping
     public Filter createFilter(@RequestBody Filter filter) {
-        if (!AuthorizationClient.doesPermissionExist("ROLE_CREATE_FILTER")) {
-            throw new AccessDeniedException("Permission ROLE_CREATE_FILTER does not exist.");
-        }
         return filterService.save(filter);
     }
 
     // Update an existing filter by ID
+    @PreAuthorize("hasAuthority({'UPDATE' }) ")
     @PutMapping("/{id}")
     public ResponseEntity<Filter> updateFilter(@PathVariable Integer id, @RequestBody Filter filter) {
-        if (!AuthorizationClient.doesPermissionExist("")) {
-            throw new AccessDeniedException("Permission  does not exist.");
-        }
         try {
             Filter updatedFilter = filterService.update(id, filter);
             return ResponseEntity.ok(updatedFilter);
@@ -72,9 +62,6 @@ public class FilterController {
     // Delete a filter by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFilter(@PathVariable Integer id) {
-        if (!AuthorizationClient.doesPermissionExist("ROLE_DELETE_FILTER")) {
-            throw new AccessDeniedException("Permission ROLE_DELETE_FILTER does not exist.");
-        }
         filterService.delete(id);
         return ResponseEntity.noContent().build();
     }

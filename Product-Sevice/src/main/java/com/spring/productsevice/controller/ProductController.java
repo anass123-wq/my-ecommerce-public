@@ -31,7 +31,7 @@ public class ProductController {
         return productService.createProduct(product);
     }
 
-    @PreAuthorize("hasAuthority({'GET_ID' , 'ADMIN' })")
+    @PreAuthorize("hasAuthority({'GET_ID' })")
     @GetMapping("/{id}")
     public Product getProductById(@PathVariable("id") Long id) throws ChangeSetPersister.NotFoundException {
         return productService.getProductById(id);

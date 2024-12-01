@@ -7,8 +7,9 @@ import com.spring.securityservice.model.User;
 import com.spring.securityservice.service.AuthenticationService;
 import com.spring.securityservice.service.JwtService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
+@PreAuthorize("hasAuthority('ADMIN')")
 @CrossOrigin(origins = {"http://localhost:3004" ,"http://localhost:3006" ,"http://localhost:3007" ,"http://localhost:3008", "http://localhost:3003","http://localhost:3000","http://localhost:3005"})
 @RequestMapping("/auth")
 @RestController
