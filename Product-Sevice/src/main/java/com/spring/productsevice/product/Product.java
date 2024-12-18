@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 @Data
@@ -22,7 +23,11 @@ public class Product {
     private String description;
     private int quantity;
     private double price;
+    private double priceInit;
+    private String image;
+    private String category;
+    private Date dateCreating;
+    private Date dateLastModification;
 
-    // Getters and setters
 }
 

@@ -2,23 +2,93 @@ package com.spring.supplierclientservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.AccessDeniedException;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+
+@PreAuthorize("hasRole('ADMIN') or hasAuthority('ADMIN')")
+@CrossOrigin(origins = {"http://localhost:3004" ,"http://localhost:3006" ,"http://localhost:3007" ,"http://localhost:3008", "http://localhost:3003","http://localhost:3000","http://localhost:3005"})
 @RestController
 @RequestMapping("SupplierClients")
 public class SupplierClientController {
+    @Autowired
+    private AuthorizationClient authorizationClient;
 
     @Autowired
     private SupplierClientService clientSupplierService;
+    @PreAuthorize("hasAuthority({'CREATE_SUPPLIERCLIENT','UPDATE' })")
 
-    // Client Endpoints @PathVariable("name")
-    // Supplier Endpoints
+    @PostMapping("/supplierClient")
+    public SupplierClient saveSupplierClient(@RequestBody SupplierClient supplierClient) throws AccessDeniedException {
+        return clientSupplierService.saveSupplierClient(supplierClient);
+    }
+    @PreAuthorize("hasAuthority('VIEW_SUPPLIERCLIENTS')")
+    @GetMapping("/supplierClient")
+    public List<SupplierClient> getAllSupplierClients() throws AccessDeniedException {
+        return clientSupplierService.getAllSupplierClients();
+    }
+    @PreAuthorize("hasAuthority('USER')")
+    @GetMapping("/name/{name}")
+    public SupplierClient getSupplierClientByName(@PathVariable("name") String name){
+        return clientSupplierService.getSupplierClientByName(name);
+    }
+    @PreAuthorize("hasAuthority({'GET_ID'})")
+    @GetMapping("/id/{id}")
+    public SupplierClient getSupplierClientById(@PathVariable("id") long id){
+        return clientSupplierService.getSupplierClientById(id);
+    }
+    @PreAuthorize("hasAuthority({'DELETE' , 'DELETE_SUPPLIERCLIENT'}) ")
+    @DeleteMapping("/Delete")
+    public SupplierClient deleteSupplierClient(@RequestBody long id){
+        return clientSupplierService.deleteSupplierClientById(id);
+    }
+    @GetMapping("/{email}")
+    public SupplierClient getSupplierClientByEmail(@PathVariable("email") String email){
+        return clientSupplierService.findByEmail(email);
+    }
+    @GetMapping("/search")
+    public ResponseEntity<List<SupplierClient>> searchSupplarClients(@RequestParam String query) throws AccessDeniedException {
+        if (!authorizationClient.doesPermissionExist(Collections.singletonList("SEARCH"))) {
+            throw new AccessDeniedException("Permission ADMIN does not exist.");
+        }
+        List<SupplierClient> results = clientSupplierService.searchSupplarClients(query);
+        return ResponseEntity.ok(results
+        );
+    }
+
+     @PostMapping("/SupplierClients/{totale}/{name}")
+    void updateTotalOrder(@PathVariable("name") String name ,@PathVariable("totale")double totale ,@RequestHeader("Source-Service") String sourceService){
+         Optional<SupplierClient> supplierClient = Optional.ofNullable(clientSupplierService.getSupplierClientByName(name));
+         if (supplierClient!=null){
+             if (sourceService == "SalesService") supplierClient.get().setTotalSeles(supplierClient.get().getTotalSeles()+totale);
+             if (sourceService == "PurchService") supplierClient.get().setTotalePurch(supplierClient.get().getTotalePurch()+totale);
+         }
+     }
+}
+/*
+* ROLE_DELETE_FILTER
+*ROLE_CREATE_FILTER
+*ROLE_VIEW_FILTER
+*CREATE
+*CREATE_PRODUCTS
+VIEW_PRODUCTS
+*DELETE_PRODUCTS
+UPDATE
+USER
+SEARCH
+DELETE_SUPPLIERCLIENT
+    DELETE
+    GET_ID
+    CREATE_SUPPLIERCLIENT
+    VIEW_SUPPLIERCLIENTS
     @PostMapping("/supplierClient")
     public ResponseEntity<SupplierClient> saveSupplierClient(@RequestBody SupplierClient supplierClient) {
         return ResponseEntity.ok(clientSupplierService.saveSupplierClient(supplierClient));
     }
-
     @GetMapping("/supplierClient")
     public ResponseEntity<List<SupplierClient>> getAllSupplierClients() {
         return ResponseEntity.ok(clientSupplierService.getAllSupplierClients());
@@ -30,5 +100,4 @@ public class SupplierClientController {
     @GetMapping("/{id}")
     public ResponseEntity<SupplierClient> getSupplierClientById(@PathVariable("id") long id){
         return ResponseEntity.ok(clientSupplierService.getSupplierClientById(id));
-    }
-}
+    }*/

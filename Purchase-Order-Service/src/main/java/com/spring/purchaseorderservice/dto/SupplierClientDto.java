@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SupplierClientDto {
     private Long id;
-
     private String name;
     private String email;
     private String phoneNumber;

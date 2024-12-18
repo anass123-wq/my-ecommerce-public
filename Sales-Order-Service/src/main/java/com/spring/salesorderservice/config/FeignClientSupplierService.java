@@ -1,17 +1,22 @@
 package com.spring.salesorderservice.config;
 
-import com.spring.salesorderservice.dto.SupplierClientDto;
+import feign.RequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "SupplierClient-Service")
 public interface FeignClientSupplierService {
 
-    @GetMapping("/SupplierClients/{id}")
-    SupplierClientDto getSupplierClientById(@PathVariable("id") Long id);
+    @Bean
+     default RequestInterceptor feignRequestInterceptor() {
+        return requestTemplate -> {
+            String serviceName = "SalesService";
+            requestTemplate.header("Source-Service", serviceName);
+        };
+    }
 
-    @GetMapping("/SupplierClients/{name}")
-    SupplierClientDto getSupplierClientByName(@PathVariable("name") String name);
+    @PutMapping("/SupplierClients/{totale}/{name}")
+    void updateTotalOrder(@PathVariable("name") String name ,@PathVariable("totale")double totale);
+
 }
