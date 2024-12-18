@@ -28,7 +28,16 @@ spring:
             - Path= /Filter-Service/**
         - id: websocket-route
           uri: ws://localhost:8033/  # عنوان WebSocket الخاص بالخدمة
-           http://localhost:8032/
+
+          predicates:
+            - Path=/ws/**
+          filters:
+            - name: StripPrefix
+              args:
+                parts: 1
+        - id: websocket-route
+          uri: ws://localhost:8032/ # عنوان WebSocket الخاص بالخدمة
+
           predicates:
             - Path=/ws/**
           filters:

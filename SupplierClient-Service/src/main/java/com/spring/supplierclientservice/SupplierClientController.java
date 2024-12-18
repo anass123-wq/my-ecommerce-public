@@ -59,11 +59,13 @@ public class SupplierClientController {
         return ResponseEntity.ok(results
         );
     }
-     @GetMapping("/SupplierClients/{totale}")
-    void updateTotalOrder(@PathVariable("name") String name ,@PathVariable("totale")double totale){
+
+     @PostMapping("/SupplierClients/{totale}/{name}")
+    void updateTotalOrder(@PathVariable("name") String name ,@PathVariable("totale")double totale ,@RequestHeader("Source-Service") String sourceService){
          Optional<SupplierClient> supplierClient = Optional.ofNullable(clientSupplierService.getSupplierClientByName(name));
          if (supplierClient!=null){
-
+             if (sourceService == "SalesService") supplierClient.get().setTotalSeles(supplierClient.get().getTotalSeles()+totale);
+             if (sourceService == "PurchService") supplierClient.get().setTotalePurch(supplierClient.get().getTotalePurch()+totale);
          }
      }
 }

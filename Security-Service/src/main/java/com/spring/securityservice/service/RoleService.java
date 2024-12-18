@@ -1,5 +1,6 @@
 package com.spring.securityservice.service;
 
+import com.spring.securityservice.model.Permission;
 import com.spring.securityservice.model.Role;
 import com.spring.securityservice.model.User;
 import com.spring.securityservice.repository.RoleRepository;
@@ -55,6 +56,21 @@ public class RoleService {
         } else {
             throw new RuntimeException("User or role not found.");
         }
+    }
+    public Role getRoleById(Long id) {
+        return roleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Role not found"));
+    }
+    public Role addPermissionToRole(Long roleId, Permission permission) {
+        Role role = getRoleById(roleId);
+        role.getPermissions().add(permission);
+        return roleRepository.save(role);
+    }
+
+    public Role removePermissionFromRole(Long roleId, Permission permission) {
+        Role role = getRoleById(roleId);
+        role.getPermissions().remove(permission);
+        return roleRepository.save(role);
     }
 
 }

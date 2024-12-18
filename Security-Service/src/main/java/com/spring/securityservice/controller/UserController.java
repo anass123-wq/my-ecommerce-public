@@ -3,6 +3,7 @@ package com.spring.securityservice.controller;
 import com.spring.securityservice.dto.RegisterUserDto;
 import com.spring.securityservice.model.Role;
 import com.spring.securityservice.model.User;
+import com.spring.securityservice.service.PermissionService;
 import com.spring.securityservice.service.RoleService;
 import com.spring.securityservice.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,8 @@ public class UserController {
     private RoleService roleService;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private PermissionService permissionService;
     @GetMapping("/me")
     public ResponseEntity<User> authenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -35,13 +37,11 @@ public class UserController {
         return ResponseEntity.ok(currentUser);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<User>> allUsers() {
-        List<User> users = userService.allUsers();
 
-        return ResponseEntity.ok(users);
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(userService.allUsers());
     }
-
 
     @PostMapping("/admin/create-user")
     public ResponseEntity<User> createUser(@RequestBody RegisterUserDto request) {
@@ -82,10 +82,7 @@ public class UserController {
         userService.deleteUser(userId);
         return ResponseEntity.ok().build();
     }
-    @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userService.allUsers());
-    }
+
     @GetMapping("/user/{userId}")
     public ResponseEntity<Optional<User>> getUserById(@PathVariable Long userId) {
         return ResponseEntity.ok(userService.getUserById(Math.toIntExact(userId)));
@@ -99,5 +96,13 @@ public class UserController {
     public ResponseEntity<List<RegisterUserDto>> searchAccounts(@RequestParam String query) {
         List<RegisterUserDto> results = userService.searchAccounts(query);
         return ResponseEntity.ok(results);
+    }
+    @PostMapping("/{userId}/roles/{roleId}")
+    public User assignRoleToUser(@PathVariable Integer userId, @PathVariable Integer roleId) {
+        return permissionService.assignRoleToUser(userId, roleId);
+    }
+    @DeleteMapping("/{userId}/roles/{roleId}")
+    public User removeRoleFromUser(@PathVariable Integer userId, @PathVariable Integer roleId) {
+        return permissionService.removeRoleFromUser(userId, roleId);
     }
 }

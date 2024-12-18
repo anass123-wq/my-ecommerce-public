@@ -1,5 +1,6 @@
 package com.spring.securityservice.controller;
 
+import com.spring.securityservice.model.Permission;
 import com.spring.securityservice.model.Role;
 import com.spring.securityservice.service.RoleService;
 import lombok.RequiredArgsConstructor;
@@ -30,5 +31,15 @@ public class RoleController {
     @DeleteMapping("/user/username/{username}/roles/{roleName}")
     public void removeRoleFromUser(@PathVariable String username, @PathVariable String roleName) {
         roleService.removeRoleFromUser(username, roleName);
+    }
+
+    @PostMapping("/{roleId}/permissions")
+    public Role addPermissionToRole(@PathVariable Long roleId, @RequestBody Permission permission) {
+        return roleService.addPermissionToRole(roleId, permission);
+    }
+
+    @DeleteMapping("/{roleId}/permissions")
+    public Role removePermissionFromRole(@PathVariable Long roleId, @RequestBody Permission permission) {
+        return roleService.removePermissionFromRole(roleId, permission);
     }
 }
