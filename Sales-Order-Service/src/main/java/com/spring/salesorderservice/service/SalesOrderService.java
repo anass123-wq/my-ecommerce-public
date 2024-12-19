@@ -42,6 +42,7 @@ public class SalesOrderService {
 
         SalesOrder salesOrder = new SalesOrder();
         salesOrder.setCustomer(salesOrderDto.getCustomer());
+        salesOrder.setDate(new Date());
         double totalAmount = 0;
 
         for (SalesLineDto line : salesOrderDto.getSalesLines()) {
@@ -61,7 +62,7 @@ public class SalesOrderService {
         }
         feignClientSupplierService.updateTotalOrder(salesOrder.getCustomer(),totalAmount);
         salesOrder.setTotalAmount(totalAmount);
-        salesOrder.setDate(new Date());
+
         salesOrder.setPaymentStatus(salesOrderDto.getPaymentStatus());
         return salesOrderRepository.save(salesOrder);
 

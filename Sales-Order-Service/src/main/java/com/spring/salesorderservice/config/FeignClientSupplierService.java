@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "SupplierClient-Service")
+@FeignClient(name = "SupplierClient-Service" ,url = "http://localhost:8034/SupplierClients")
 public interface FeignClientSupplierService {
 
     @Bean
@@ -16,7 +16,7 @@ public interface FeignClientSupplierService {
         };
     }
 
-    @PutMapping("/SupplierClients/{totale}/{name}")
-    void updateTotalOrder(@PathVariable("name") String name ,@PathVariable("totale")double totale);
+    @PutMapping("/SupplierClients/{name}")
+    void updateTotalOrder(@PathVariable("name") String name ,@RequestParam("totale")double totale);
 
 }

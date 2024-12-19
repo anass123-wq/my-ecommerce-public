@@ -4,6 +4,7 @@ import com.spring.productsevice.product.Product;
 import com.spring.productsevice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -54,7 +55,9 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
     @PutMapping("/{id}/updateDate")
-    public ResponseEntity<?> updateDate(@PathVariable("id") Long id, @RequestParam("date") Date date){
+    public ResponseEntity<?> updateDate(@PathVariable("id") Long id, @RequestParam("date") /*@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)*/ Date date){
+        System.out.println(date);
+        System.out.println(id);
         productService.updateDate(id,date);
         return ResponseEntity.ok().build();
     }

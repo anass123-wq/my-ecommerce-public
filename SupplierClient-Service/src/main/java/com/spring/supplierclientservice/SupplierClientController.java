@@ -59,15 +59,22 @@ public class SupplierClientController {
         return ResponseEntity.ok(results
         );
     }
+    @PutMapping("/SupplierClients/{name}")
+    public ResponseEntity<?> updateTotalOrder(@PathVariable("name") String name, @RequestParam("totale") double totale, @RequestHeader("Source-Service") String sourceService){
+        Optional<SupplierClient> supplierClient = Optional.ofNullable(clientSupplierService.getSupplierClientByName(name));
+        if (supplierClient.isPresent()) {
+            SupplierClient client = supplierClient.get();
+            if (sourceService.equals("SalesService")) {
+                client.setTotalSeles(client.getTotalSeles() + totale);
+            } else if (sourceService.equals("PurchService")) {
+                client.setTotalePurch(client.getTotalePurch() + totale);
+            }
+            // Save the updated supplier client if necessary
+            clientSupplierService.saveSupplierClient(client);
+        }
+        return ResponseEntity.ok().build();
+    }
 
-     @PostMapping("/SupplierClients/{totale}/{name}")
-    void updateTotalOrder(@PathVariable("name") String name ,@PathVariable("totale")double totale ,@RequestHeader("Source-Service") String sourceService){
-         Optional<SupplierClient> supplierClient = Optional.ofNullable(clientSupplierService.getSupplierClientByName(name));
-         if (supplierClient!=null){
-             if (sourceService == "SalesService") supplierClient.get().setTotalSeles(supplierClient.get().getTotalSeles()+totale);
-             if (sourceService == "PurchService") supplierClient.get().setTotalePurch(supplierClient.get().getTotalePurch()+totale);
-         }
-     }
 }
 /*
 * ROLE_DELETE_FILTER
