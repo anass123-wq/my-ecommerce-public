@@ -1,6 +1,7 @@
 package com.spring.purchaseorderservice.repository;
 
 import com.spring.purchaseorderservice.model.PaymentStatus;
+import com.spring.purchaseorderservice.model.PurchaseLine;
 import com.spring.purchaseorderservice.model.PurchaseOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,5 @@ public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, Lo
     @Query("SELECT pch FROM PurchaseOrder pch WHERE pch.totalAmount >= :amountPurch OR pch.supplier LIKE %:query%")
     List<PurchaseOrder> searchPurchaseOrder(@Param("amountPurch") Double amountPurch, @Param("query") String query);
 
+    List<PurchaseOrder> findByPurchaseLinesContaining( List< PurchaseLine >  purchaseLines);
 }

@@ -43,6 +43,7 @@ public class SalesOrderService {
         SalesOrder salesOrder = new SalesOrder();
         salesOrder.setCustomer(salesOrderDto.getCustomer());
         salesOrder.setDate(new Date());
+        salesOrder.setPaymentStatus(salesOrderDto.getPaymentStatus());
         double totalAmount = 0;
 
         for (SalesLineDto line : salesOrderDto.getSalesLines()) {
@@ -60,10 +61,8 @@ public class SalesOrderService {
             totalAmount += line.getPrice() * line.getQuantity();
             salesLineRepository.save(salesLine);
         }
-        feignClientSupplierService.updateTotalOrder(salesOrder.getCustomer(),totalAmount);
+        feignClientSupplierService.updateTotalOrder(salesOrder.getCustomer(),totalAmount,salesOrder.getPaymentStatus());
         salesOrder.setTotalAmount(totalAmount);
-
-        salesOrder.setPaymentStatus(salesOrderDto.getPaymentStatus());
         return salesOrderRepository.save(salesOrder);
 
     }
@@ -148,13 +147,15 @@ public class SalesOrderService {
 
         return salesOrderRepository.findBySalesLinesContaining(salesLine);
     }
-}
-/*
-
 
     public List<SalesLine> getSalesLinesBySalesOrderId(Long id) {
         return salesLineRepository.findSalesLineBySalesOrderId(id);
     }
+}
+/*
+
+
+
     public List<SalesLine> getSalesLinesByProductId(Long id) {
         return salesLineRepository.findSalesLinesByProductId(id);
     }*/

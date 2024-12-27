@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -33,6 +34,7 @@ public class PurchaseOrderService {
         PurchaseOrder purchaseOrder = new PurchaseOrder();
         purchaseOrder.setSupplier(purchaseOrderDto.getSupplier());
         purchaseOrder.setDate(new Date());
+        purchaseOrder.setPaymentStatus(purchaseOrderDto.getPaymentStatus());
         double totalAmount = 0;
         for (PurchaseLineDto line : purchaseOrderDto.getPurchaseLines()) {
             PurchaseLine purchaseLine = new PurchaseLine();
@@ -47,9 +49,8 @@ public class PurchaseOrderService {
             totalAmount += line.getPrice() * line.getQuantity();
             purchaseLineRepository.save(purchaseLine);
         }
-        feignClientSupplierService.updateTotalOrder(purchaseOrder.getSupplier() ,totalAmount);
+        feignClientSupplierService.updateTotalOrder(purchaseOrder.getSupplier() ,totalAmount , purchaseOrder.getPaymentStatus());
         purchaseOrder.setTotalAmount(totalAmount);
-        purchaseOrder.setPaymentStatus(purchaseOrderDto.getPaymentStatus());
         return purchaseOrderRepository.save(purchaseOrder);
 
     }
@@ -121,5 +122,13 @@ public class PurchaseOrderService {
         purchaseLineRepository.delete(purchaseLine);
         return purchaseLine;
     }
-
+/*
+    public List<PurchaseOrder> getPurchaseOrderBySalesLineAndPrice(double id) {
+        List< PurchaseLine > lines= purchaseLineRepository.findByPriceContaining(id);
+        return purchaseOrderRepository.findByPurchaseLinesContaining(lines);
     }
+*/
+    public List<PurchaseLine> getLinesByPurchaseOrderId(Integer id){
+        return purchaseLineRepository.findByPurchaseOrderId(id);
+    }
+}

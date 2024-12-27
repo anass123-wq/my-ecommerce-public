@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -90,6 +91,18 @@ public class PurchaseOrderController {
         PurchaseLine updatedLine = purchaseOrderService.updatePurchaseLine(id, lineDto);
         return ResponseEntity.ok(updatedLine);
     }
+    /*
+    @GetMapping("/line/{id}/order")
+    public ResponseEntity<List<PurchaseOrder>> getPurchaseOrderBySalesLinePrice(@PathVariable double id) {
+        List<PurchaseOrder> purchaseOrder = purchaseOrderService.getPurchaseOrderBySalesLineAndPrice(id);
+        return ResponseEntity.ok(Collections.singletonList((PurchaseOrder) purchaseOrder));
+    }*/
+    @GetMapping("/line/{id}/lines")
+    public ResponseEntity<List<PurchaseLine>> getLinesByPurchaseOrderId(@PathVariable Integer id){
+        List<PurchaseLine> lines = purchaseOrderService.getLinesByPurchaseOrderId(id);
+        return (ResponseEntity< List< PurchaseLine > >) lines;
+    }
+
 }
 
 

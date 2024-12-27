@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.nio.file.AccessDeniedException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @PreAuthorize("hasRole('ADMIN') or hasAuthority('ADMIN')")
@@ -52,22 +53,25 @@ public class SupplierClientController {
     }
     @GetMapping("/search")
     public ResponseEntity<List<SupplierClient>> searchSupplarClients(@RequestParam String query) throws AccessDeniedException {
-        if (!authorizationClient.doesPermissionExist(Collections.singletonList("SEARCH"))) {
-            throw new AccessDeniedException("Permission ADMIN does not exist.");
-        }
         List<SupplierClient> results = clientSupplierService.searchSupplarClients(query);
         return ResponseEntity.ok(results
         );
     }
     @PutMapping("/SupplierClients/{name}")
-    public ResponseEntity<?> updateTotalOrder(@PathVariable("name") String name, @RequestParam("totale") double totale, @RequestHeader("Source-Service") String sourceService){
+    public ResponseEntity<?> updateTotalOrder(@PathVariable("name") String name, @RequestParam("totale") double totale,@RequestParam("paymentStatus") String paymentStatus, @RequestHeader("Source-Service") String sourceService){
         Optional<SupplierClient> supplierClient = Optional.ofNullable(clientSupplierService.getSupplierClientByName(name));
         if (supplierClient.isPresent()) {
             SupplierClient client = supplierClient.get();
             if (sourceService.equals("SalesService")) {
                 client.setTotalSeles(client.getTotalSeles() + totale);
+                if (Objects.equals(paymentStatus, "UNPAID")){
+                    client.setBorrowingPricSeles(client.getBorrowingPricSeles() + totale);
+                }
             } else if (sourceService.equals("PurchService")) {
                 client.setTotalePurch(client.getTotalePurch() + totale);
+                if (Objects.equals(paymentStatus, "UNPAID")){
+                    client.setBorrowingPricPurch(client.getBorrowingPricPurch() + totale);
+                }
             }
             // Save the updated supplier client if necessary
             clientSupplierService.saveSupplierClient(client);

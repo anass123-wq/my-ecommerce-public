@@ -103,4 +103,8 @@ public class SalesOrderController {
     public List<SalesLine> getSalesLines() {
         return salesOrderService.getSalesLines();
     }
+    @GetMapping("/line/{id}/lines")
+    public  List<SalesLine>getSalesLinesBySalesOrderId(Long id) {
+        return salesOrderService.getSalesLinesBySalesOrderId(id);
+    }
 }

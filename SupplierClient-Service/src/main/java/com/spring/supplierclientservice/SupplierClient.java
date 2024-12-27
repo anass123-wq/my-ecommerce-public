@@ -19,4 +19,6 @@ public class SupplierClient  {
     private String phoneNumber;
     private double totalSeles;
     private double totalePurch;
+    private double borrowingPricSeles;
+    private double borrowingPricPurch;
 }

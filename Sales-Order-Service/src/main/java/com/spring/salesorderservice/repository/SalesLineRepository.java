@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface SalesLineRepository extends JpaRepository<SalesLine, Long> {
-    /*List<SalesLine> findSalesLineBySalesOrderId(Long id);
-    List<SalesLine> findSalesLinesByProductId(Long id);*/
+    List<SalesLine> findSalesLineBySalesOrderId(Long id);
+    /*List<SalesLine> findSalesLinesByProductId(Long id);*/
 }

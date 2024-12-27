@@ -1,5 +1,6 @@
 package com.spring.salesorderservice.config;
 
+import com.spring.salesorderservice.model.PaymentStatus;
 import feign.RequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,6 @@ public interface FeignClientSupplierService {
     }
 
     @PutMapping("/SupplierClients/{name}")
-    void updateTotalOrder(@PathVariable("name") String name ,@RequestParam("totale")double totale);
+    void updateTotalOrder(@PathVariable("name") String name , @RequestParam("totale")double totale,@RequestParam("paymentStatus") PaymentStatus paymentStatus);
 
 }
