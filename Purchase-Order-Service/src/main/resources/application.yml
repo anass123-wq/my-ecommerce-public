@@ -1,0 +1,15 @@
+logging:
+  level:
+    feign:
+      client: DEBUG
+
+server:
+  tomcat:
+    max-threads: 200               # عدد الخيوط المتاحة لمعالجة الطلبات
+    connection-timeout: 20000ms     # مهلة الاتصال
+    max-connections: 10000          # الحد الأقصى للاتصالات المتزامنة
+
+spring:
+  webflux:
+    websocket:
+      timeout: 30000               # تأخير المهلة للاتصال بـ WebSocket إلى 30 ثانية

@@ -1,0 +1,153 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AdminSetup {
+  + addAdminUser(): void
+}
+class ApplicationConfiguration {
+  ~ userDetailsService(): UserDetailsService
+  ~ authenticationProvider(): AuthenticationProvider
+  + authenticationManager(AuthenticationConfiguration): AuthenticationManager
+  ~ passwordEncoder(): BCryptPasswordEncoder
+}
+class AuthenticationController {
+  + register(RegisterUserDto): ResponseEntity<User>
+  + authenticate(LoginUserDto): ResponseEntity<LoginResponse>
+}
+class AuthenticationService {
+  + signup(RegisterUserDto): User
+  + authenticate(LoginUserDto): User
+}
+class GlobalExceptionHandler {
+  + handleSecurityException(Exception): ProblemDetail
+}
+class JwtAuthenticationFilter {
+  # doFilterInternal(HttpServletRequest, HttpServletResponse, FilterChain): void
+}
+class JwtService {
+  - extractAllClaims(String): Claims
+  + extractClaim(String, Function<Claims, T>): T
+  + generateToken(Map<String, Object>, UserDetails): String
+  - isTokenExpired(String): boolean
+  - extractExpiration(String): Date
+  + generateToken(UserDetails): String
+  - buildToken(Map<String, Object>, UserDetails, long): String
+  + isTokenValid(String, UserDetails): boolean
+  + extractUsername(String): String
+   signInKey: Key
+   expirationTime: long
+}
+class LoginResponse {
+  # canEqual(Object): boolean
+  + hashCode(): int
+  + toString(): String
+  + equals(Object): boolean
+   expiresIn: long
+   token: String
+}
+class LoginUserDto {
+  + equals(Object): boolean
+  + hashCode(): int
+  # canEqual(Object): boolean
+  + toString(): String
+   email: String
+   password: String
+}
+class RegisterUserDto {
+  + toString(): String
+  + equals(Object): boolean
+  # canEqual(Object): boolean
+  + hashCode(): int
+   password: String
+   fullName: String
+   id: Integer
+   email: String
+   roles: Set<Role>
+}
+class Role {
+  # canEqual(Object): boolean
+  + hashCode(): int
+  + toString(): String
+  + equals(Object): boolean
+   name: String
+   id: Integer
+}
+class RoleController {
+  + addRoleToUser(String, String): void
+  + getRolesForUser(String): List<Role>
+  + removeRoleFromUser(String, String): void
+}
+interface RoleRepository << interface >> {
+  + findByName(String): Optional<Role>
+}
+class RoleService {
+  + saveRole(Role): Role
+  + removeRoleFromUser(String, String): void
+  + getRolesForUser(String): List<Role>
+  + addRoleToUser(String, String): void
+   roles: List<Role>
+}
+class SecurityConfiguration {
+  ~ corsConfigurationSource(): CorsConfigurationSource
+  + securityFilterChain(HttpSecurity): SecurityFilterChain
+}
+class SecurityServiceApplication {
+  + main(String[]): void
+}
+class SecurityServiceApplicationTests {
+  ~ contextLoads(): void
+}
+class User {
+  + toString(): String
+  + equals(Object): boolean
+  # canEqual(Object): boolean
+  + hashCode(): int
+   updatedAt: Date
+   authorities: Collection<GrantedAuthority>
+   enabled: boolean
+   id: Integer
+   createdAt: Date
+   password: String
+   accountNonExpired: boolean
+   email: String
+   credentialsNonExpired: boolean
+   accountNonLocked: boolean
+   fullName: String
+   username: String
+   roles: Set<Role>
+}
+class UserController {
+  + updateUser(Long, User): ResponseEntity<User>
+  + saveRole(Role): ResponseEntity<Role>
+  + updateUserRoles(Integer, List<Role>): ResponseEntity<User>
+  + allUsers(): ResponseEntity<List<User>>
+  + searchAccounts(String): ResponseEntity<List<RegisterUserDto>>
+  + deleteUser(Integer): ResponseEntity<?>
+  + authenticatedUser(): ResponseEntity<User>
+  + createUser(RegisterUserDto): ResponseEntity<User>
+  + getUserByUsername(String): ResponseEntity<Optional<User>>
+  + getUserById(Long): ResponseEntity<Optional<User>>
+   allUsers: ResponseEntity<List<User>>
+   roles: ResponseEntity<List<Role>>
+}
+interface UserRepository << interface >> {
+  + findByUsernameContainingOrRoles_NameContaining(String): List<User>
+  + findByEmail(String): Optional<User>
+}
+class UserService {
+  + deleteUser(Integer): void
+  + allUsers(): List<User>
+  + getUserById(Integer): Optional<User>
+  + createUser(User): User
+  + searchAccounts(String): List<RegisterUserDto>
+  + updateUser(Long, User): User
+  + updateRoles(Integer, List<Role>): User
+  + createUserWithRoles(User, Set<Role>): void
+  - addRoleToUser(String, String): void
+  + getUserByUsername(String): Optional<User>
+}
+
+@enduml

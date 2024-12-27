@@ -1,5 +1,6 @@
 package com.spring.purchaseorderservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,12 +17,9 @@ public class PurchaseLine {
         private Long id;
         private int quantity;
         private double price;
-
-        @ManyToOne
-        @JoinColumn(name = "purchase_order_id")
-        private PurchaseOrder purchaseOrder;
-
         private Long productId;
-
-        // Getters and Setters
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "purchase_order_id")
+        // Prevent circular reference
+        private PurchaseOrder purchaseOrder;
 }

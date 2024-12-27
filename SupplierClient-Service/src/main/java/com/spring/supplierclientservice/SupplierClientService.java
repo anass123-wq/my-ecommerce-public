@@ -26,4 +26,16 @@ public class SupplierClientService {
     public List<SupplierClient> getAllSupplierClients() {
         return clientRepository.findAll();
     }
+    public  SupplierClient deleteSupplierClientById(long id) {
+        SupplierClient supplierClient = getSupplierClientById(id);
+        clientRepository.delete(supplierClient);
+        return supplierClient;
+    }
+
+    public SupplierClient findByEmail(String email){
+        return clientRepository.findByemail(email);
+    }
+    public List<SupplierClient> searchSupplarClients(String query) {
+        return clientRepository.searchByNameOrEmail(query);
+    }
 }

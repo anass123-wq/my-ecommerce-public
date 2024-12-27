@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "server.tomcat.max-threads",
+      "type": "java.lang.String",
+      "description": "Description for server.tomcat.max-threads."
+    },
+    {
+      "name": "spring.webflux.websocket.timeout",
+      "type": "java.lang.String",
+      "description": "Description for spring.webflux.websocket.timeout."
+    }
+  ] }
