@@ -8,6 +8,7 @@ import com.spring.securityservice.service.RoleService;
 import com.spring.securityservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -19,7 +20,7 @@ import java.util.Optional;
 @PreAuthorize("hasAuthority('ADMIN')")
 @CrossOrigin(origins = {"http://localhost:3004" ,"http://localhost:3006" ,"http://localhost:3007" ,"http://localhost:3008", "http://localhost:3003","http://localhost:3000","http://localhost:3005"})
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
     @Autowired
@@ -28,6 +29,18 @@ public class UserController {
     private UserService userService;
     @Autowired
     private PermissionService permissionService;
+    @PreAuthorize("hasAuthority('ADMIN')") // Ensure only admins can access this endpoint
+    @GetMapping
+    public ResponseEntity<List<User>> getAllUsers() {
+        try {
+            List<User> users = userService.allUsers();
+            return ResponseEntity.ok(users);
+        } catch (Exception e) {
+            // Log error for debugging
+            System.err.println("Error fetching users: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
     @GetMapping("/me")
     public ResponseEntity<User> authenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -37,12 +50,7 @@ public class UserController {
         return ResponseEntity.ok(currentUser);
     }
 
-
-    @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok(userService.allUsers());
-    }
-
+    //
     @PostMapping("/admin/create-user")
     public ResponseEntity<User> createUser(@RequestBody RegisterUserDto request) {
         User newUser = new User();

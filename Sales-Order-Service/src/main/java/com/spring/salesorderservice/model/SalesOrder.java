@@ -1,6 +1,7 @@
 package com.spring.salesorderservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +27,9 @@ public class SalesOrder {
     private Date date;
     private PaymentStatus paymentStatus;
     @OneToMany(mappedBy = "salesOrder",cascade = CascadeType.ALL)
-    private List<SalesLine> salesLines = new ArrayList<>(); ;
-
+    @JsonManagedReference
+    private List<SalesLine> salesLines = new ArrayList<>();
+    @OneToMany(mappedBy = "salesOrder",cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<LineReturn> lineReturns = new ArrayList<>();
 }

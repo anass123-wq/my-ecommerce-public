@@ -1,5 +1,6 @@
 package com.spring.supplierclientservice;
 
+import jakarta.ws.rs.HeaderParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,14 +11,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-
+//
 @PreAuthorize("hasRole('ADMIN') or hasAuthority('ADMIN')")
 @CrossOrigin(origins = {"http://localhost:3004" ,"http://localhost:3006" ,"http://localhost:3007" ,"http://localhost:3008", "http://localhost:3003","http://localhost:3000","http://localhost:3005"})
 @RestController
-@RequestMapping("SupplierClients")
+@RequestMapping("/SupplierClients")
 public class SupplierClientController {
-    @Autowired
-    private AuthorizationClient authorizationClient;
 
     @Autowired
     private SupplierClientService clientSupplierService;
@@ -58,7 +57,7 @@ public class SupplierClientController {
         );
     }
     @PutMapping("/SupplierClients/{name}")
-    public ResponseEntity<?> updateTotalOrder(@PathVariable("name") String name, @RequestParam("totale") double totale,@RequestParam("paymentStatus") String paymentStatus, @RequestHeader("Source-Service") String sourceService){
+    public ResponseEntity<?> updateTotalOrder(@PathVariable("name") String name, @RequestParam("totale") double totale, @RequestHeader("Source-Service")@RequestParam("sourceService") String sourceService,@RequestParam(value = "paymentStatus", required = false)String paymentStatus){
         Optional<SupplierClient> supplierClient = Optional.ofNullable(clientSupplierService.getSupplierClientByName(name));
         if (supplierClient.isPresent()) {
             SupplierClient client = supplierClient.get();
@@ -78,24 +77,23 @@ public class SupplierClientController {
         }
         return ResponseEntity.ok().build();
     }
-
 }
 /*
-* ROLE_DELETE_FILTER
-*ROLE_CREATE_FILTER
-*ROLE_VIEW_FILTER
-*CREATE
-*CREATE_PRODUCTS
+ ROLE_DELETE_FILTER
+ROLE_CREATE_FILTER
+ROLE_VIEW_FILTER
+CREATE
+CREATE_PRODUCTS
 VIEW_PRODUCTS
-*DELETE_PRODUCTS
+DELETE_PRODUCTS
 UPDATE
 USER
 SEARCH
 DELETE_SUPPLIERCLIENT
-    DELETE
-    GET_ID
-    CREATE_SUPPLIERCLIENT
-    VIEW_SUPPLIERCLIENTS
+DELETE
+GET_ID
+CREATE_SUPPLIERCLIENT
+VIEW_SUPPLIERCLIENTS
     @PostMapping("/supplierClient")
     public ResponseEntity<SupplierClient> saveSupplierClient(@RequestBody SupplierClient supplierClient) {
         return ResponseEntity.ok(clientSupplierService.saveSupplierClient(supplierClient));

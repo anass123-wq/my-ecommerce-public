@@ -1,28 +1,29 @@
-package com.spring.salesorderservice.model;
+package com.spring.purchaseorderservice.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+
+import java.util.Date;
 
 @Entity
 @Data
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class SalesLine {
-
+public class LineReturn {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int quantity;
     private double price;
     private Long productId;
-    @ManyToOne
-    @JoinColumn(name = "sales_order_id")
+    private Date returnDate;
+    private String returnReason;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "purchase_order_id")
+    // Prevent circular reference
     @JsonBackReference
-    private SalesOrder salesOrder;
-
+    private PurchaseOrder purchaseOrder;
 }

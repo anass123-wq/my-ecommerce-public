@@ -1,5 +1,6 @@
 package com.spring.purchaseorderservice.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,7 +25,11 @@ public class PurchaseOrder {
     private Date date;
     private PaymentStatus paymentStatus;
     @OneToMany(mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<PurchaseLine> purchaseLines = new ArrayList<>();
+    @OneToMany(mappedBy = "purchaseOrder", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<LineReturn> lineReturns = new ArrayList<>();
 
 }
 

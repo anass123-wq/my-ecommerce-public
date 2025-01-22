@@ -16,8 +16,8 @@ import java.util.Optional;
 
 @Repository
 public interface SalesOrderRepository extends JpaRepository<SalesOrder, Long> {
-    @Query("SELECT s FROM SalesOrder s WHERE s.totalAmount >= :amount OR s.customer LIKE %:query%")
-    List<SalesOrder> searchSalesOrder(@Param("amount") Double amount, @Param("query") String query);
+    @Query("SELECT s FROM SalesOrder s WHERE s.totalAmount >= :amount OR s.paymentStatus = :paymentStatus OR s.date = :date OR s.customer LIKE %:query%")
+    List<SalesOrder> searchSalesOrder(@Param("amount") Double amount,@Param("paymentStatus") PaymentStatus paymentStatus,@Param("date") Date date, @Param("query") String query);
     SalesOrder findByDate(Date date);
     Optional<SalesOrder> findByTotalAmount(Double totalAmount);
     SalesOrder findByPaymentStatus(PaymentStatus paymentStatus);

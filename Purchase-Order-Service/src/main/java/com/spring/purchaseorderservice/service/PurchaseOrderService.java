@@ -1,6 +1,7 @@
 package com.spring.purchaseorderservice.service;
 
 import com.spring.purchaseorderservice.config.FeignClientSupplierService;
+import com.spring.purchaseorderservice.config.FeignPaiement;
 import com.spring.purchaseorderservice.config.FeignProductService;
 import com.spring.purchaseorderservice.dto.PurchaseLineDto;
 import com.spring.purchaseorderservice.dto.PurchaseOrderDto;
@@ -13,14 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
 public class PurchaseOrderService {
-
     @Autowired
     private PurchaseLineRepository purchaseLineRepository;
     @Autowired
@@ -29,12 +29,13 @@ public class PurchaseOrderService {
     private FeignProductService feignProductService;
     @Autowired
     FeignClientSupplierService feignClientSupplierService;
+    @Autowired
+    private FeignPaiement feignPaiement;
     @Transactional
     public PurchaseOrder createPurchaseOrder(PurchaseOrderDto purchaseOrderDto) throws IllegalArgumentException {
         PurchaseOrder purchaseOrder = new PurchaseOrder();
         purchaseOrder.setSupplier(purchaseOrderDto.getSupplier());
         purchaseOrder.setDate(new Date());
-        purchaseOrder.setPaymentStatus(purchaseOrderDto.getPaymentStatus());
         double totalAmount = 0;
         for (PurchaseLineDto line : purchaseOrderDto.getPurchaseLines()) {
             PurchaseLine purchaseLine = new PurchaseLine();
@@ -49,7 +50,8 @@ public class PurchaseOrderService {
             totalAmount += line.getPrice() * line.getQuantity();
             purchaseLineRepository.save(purchaseLine);
         }
-        feignClientSupplierService.updateTotalOrder(purchaseOrder.getSupplier() ,totalAmount , purchaseOrder.getPaymentStatus());
+        purchaseOrder.setPaymentStatus(purchaseOrderDto.getPaymentStatus());
+        feignClientSupplierService.updateTotalOrder(purchaseOrder.getSupplier() ,totalAmount,"PurchService" ,purchaseOrder.getPaymentStatus());
         purchaseOrder.setTotalAmount(totalAmount);
         return purchaseOrderRepository.save(purchaseOrder);
 
@@ -79,7 +81,10 @@ public class PurchaseOrderService {
     public PurchaseOrder updatePurchaseOrder(long id ,PurchaseOrderDto purchaseOrderDto) {
         PurchaseOrder purchaseOrder = getPurchaseOrderById(id);
         purchaseOrder.setSupplier(purchaseOrderDto.getSupplier());
-        purchaseOrder.setTotalAmount(purchaseOrderDto.getTotalAmount());
+        if(purchaseOrderDto.getTotalAmount()!=purchaseOrder.getTotalAmount()){
+            purchaseOrder.setTotalAmount(purchaseOrderDto.getTotalAmount());
+            feignPaiement.updatePayment(purchaseOrder.getTotalAmount());
+        }
         purchaseOrder.setPaymentStatus(purchaseOrderDto.getPaymentStatus());
         purchaseOrder.setDate(purchaseOrderDto.getDate());
         return purchaseOrderRepository.save(purchaseOrder);
@@ -87,48 +92,27 @@ public class PurchaseOrderService {
 
     public List<PurchaseOrder> searchPurchaseInvoices(String query) {
         Double totalAmount = null;
+        PaymentStatus paymentStatus = null;
+        Date date = null;
         try {
             totalAmount = Double.parseDouble(query);
+            paymentStatus = PaymentStatus.valueOf(query);
+            date = Date.from(Instant.parse(query));
         } catch (NumberFormatException e) {
             System.out.println(e.getMessage());
         }
-        return purchaseOrderRepository.searchPurchaseOrder(totalAmount ,query);
+        return purchaseOrderRepository.searchPurchaseOrder(totalAmount ,paymentStatus,date,query);
     }
 
-    public PurchaseLine updatePurchaseLine(Long id, PurchaseLine purchaseLine) {
-        PurchaseLine line = purchaseLineRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("PurchaseLine not found"));
 
-        PurchaseOrder order = purchaseLine.getPurchaseOrder();
-        double oldTotal = line.getPrice() * line.getQuantity();
-        double newTotal = purchaseLine.getPrice() * purchaseLine.getQuantity();
-
-        order.setTotalAmount(order.getTotalAmount() - oldTotal + newTotal);
-
-        line.setProductId(purchaseLine.getProductId());
-        line.setQuantity(purchaseLine.getQuantity());
-        line.setPrice(purchaseLine.getPrice());
-
-        purchaseLineRepository.save(purchaseLine);
-        purchaseOrderRepository.save(order);
-
-        return line;
+    public List<PurchaseLine> getLinesByPurchaseOrderId(Long id){
+        return purchaseLineRepository.findPurchaseLineByPurchaseOrderId(Math.toIntExact(id));
     }
-
-    public PurchaseLine deleteSalesLine(Long id) {
+    public PurchaseOrder getPurchaseOrderByPurchaseLineId(Long id) {
         PurchaseLine purchaseLine = purchaseLineRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("purchaseLine not found"));
 
-        purchaseLineRepository.delete(purchaseLine);
-        return purchaseLine;
+        return purchaseOrderRepository.findByPurchaseLinesContaining(purchaseLine);
     }
-/*
-    public List<PurchaseOrder> getPurchaseOrderBySalesLineAndPrice(double id) {
-        List< PurchaseLine > lines= purchaseLineRepository.findByPriceContaining(id);
-        return purchaseOrderRepository.findByPurchaseLinesContaining(lines);
+
     }
-*/
-    public List<PurchaseLine> getLinesByPurchaseOrderId(Integer id){
-        return purchaseLineRepository.findByPurchaseOrderId(id);
-    }
-}

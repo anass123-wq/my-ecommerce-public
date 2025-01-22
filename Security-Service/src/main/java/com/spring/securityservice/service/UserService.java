@@ -28,11 +28,7 @@ public class UserService {
     }
 
     public List<User> allUsers() {
-        List<User> users = new ArrayList<>();
-
-        userRepository.findAll().forEach(users::add);
-
-        return users;
+        return userRepository.findAll();
     }
 
     public void createUserWithRoles(User user, Set<Role> roleNames) {

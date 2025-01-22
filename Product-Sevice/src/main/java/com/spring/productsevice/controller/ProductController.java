@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @PreAuthorize("hasAuthority('ADMIN')")
-@CrossOrigin(origins = {"http://localhost:3004" ,"http://localhost:3006" ,"http://localhost:3007" ,"http://localhost:3008", "http://localhost:3003","http://localhost:3000","http://localhost:3005"})
+//@CrossOrigin(origins = {"http://localhost:3004" ,"http://localhost:3006" ,"http://localhost:3007" ,"http://localhost:3008", "http://localhost:3003","http://localhost:3000","http://localhost:3005"})
+@CrossOrigin(origins ="*")
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {

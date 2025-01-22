@@ -19,7 +19,7 @@ import java.util.List;
 public class AdminSetup {
 
     @Autowired
-        private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private UserRepository userRepository;
 

@@ -14,10 +14,9 @@ import java.util.List;
 @Repository
 public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, Long> {
     PurchaseOrder findByDate(Date date);
-   // PurchaseOrder findByTotalAmout(Double totalAmout);
+    PurchaseOrder findByPurchaseLinesContaining(PurchaseLine purchaseLine);
     PurchaseOrder findByPaymentStatus(PaymentStatus paymentStatus);
-    @Query("SELECT pch FROM PurchaseOrder pch WHERE pch.totalAmount >= :amountPurch OR pch.supplier LIKE %:query%")
-    List<PurchaseOrder> searchPurchaseOrder(@Param("amountPurch") Double amountPurch, @Param("query") String query);
+    @Query("SELECT pch FROM PurchaseOrder pch WHERE pch.totalAmount >= :amountPurch OR s.paymentStatus = :paymentStatus OR s.date = :date OR pch.supplier LIKE %:query%")
+    List<PurchaseOrder> searchPurchaseOrder(@Param("amountPurch") Double amountPurch,@Param("paymentStatus") PaymentStatus paymentStatus,@Param("date") Date date, @Param("query") String query);
 
-    List<PurchaseOrder> findByPurchaseLinesContaining( List< PurchaseLine >  purchaseLines);
 }

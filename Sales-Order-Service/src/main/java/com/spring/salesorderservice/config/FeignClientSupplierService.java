@@ -18,6 +18,6 @@ public interface FeignClientSupplierService {
     }
 
     @PutMapping("/SupplierClients/{name}")
-    void updateTotalOrder(@PathVariable("name") String name , @RequestParam("totale")double totale,@RequestParam("paymentStatus") PaymentStatus paymentStatus);
+    void updateTotalOrder(@PathVariable("name") String name ,@RequestParam("totale")double totale,@RequestParam("sourceService")  String sourceService ,@RequestParam(value = "paymentStatus", required = false) PaymentStatus paymentStatus);
 
 }

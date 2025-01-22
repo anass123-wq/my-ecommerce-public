@@ -1,46 +1,45 @@
 spring:
   cloud:
     gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+      corsConfigurations:
+        '[/**]':
+          allowedOrigins: "*"
+          allowedMethods:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+            - OPTIONS
+          allowedHeaders:
+            - "*"
+          allowCredentials: true
       routes:
         - id: r1
-          uri: http://localhost:8080/
+          uri: lb://Product-Service
           predicates:
-          - Path= /Security/**
-        - id : r2
-          uri : http://localhost:8031/
-          predicates :
-            - Path= /Product-Service/**
-        - id : r3
-          uri : http://localhost:8032/
-          predicates :
-            - Path= /Sales-Order-Service/**
+            - Path=/api/products/**, *
+        - id: r2
+          uri: lb://Sales-Order-Service
+          predicates:
+            - Path=/sales/**
+        - id: r3
+          uri: lb://Purchase-Order-Service
+          predicates:
+            - Path=/purchases/**
         - id: r4
-          uri: http://localhost:8033/
+          uri: lb://SupplierClient-Service
           predicates:
-            - Path= /Purchase-Order-Service/**
+            - Path=/SupplierClients/**
         - id: r5
-          uri: http://localhost:8034/
+          uri: lb://Filter-Service
           predicates:
-            - Path= /SupplierClient-Service/**
+            - Path=/api/Filters/**
         - id: r6
-          uri: http://localhost:9056/
+          uri: lb://Security-Service
           predicates:
-            - Path= /Filter-Service/**
-        - id: websocket-route
-          uri: ws://localhost:8033/  # عنوان WebSocket الخاص بالخدمة
-
-          predicates:
-            - Path=/ws/**
-          filters:
-            - name: StripPrefix
-              args:
-                parts: 1
-        - id: websocket-route
-          uri: ws://localhost:8032/ # عنوان WebSocket الخاص بالخدمة
-
-          predicates:
-            - Path=/ws/**
-          filters:
-            - name: StripPrefix
-              args:
-                parts: 1
+            - Path=/users/**
+  server:
+    tomcat:
+      relaxed-query-chars: "|{}[]"

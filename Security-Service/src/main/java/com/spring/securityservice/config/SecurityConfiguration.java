@@ -17,10 +17,9 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
-
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration{
+public class SecurityConfiguration {
     @Autowired
     private AuthenticationProvider authenticationProvider;
     @Autowired
@@ -29,32 +28,39 @@ public class SecurityConfiguration{
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())  // تعطيل CSRF إذا كنت تستخدم JWT
+                .csrf(csrf -> csrf.disable())  // Disable CSRF for JWT
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))  // Apply CORS configuration
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/auth/**").permitAll()  // السماح للوصول إلى المسارات الخاصة بـ /auth
-                        .anyRequest().authenticated()  // تأكيد أن أي طلب آخر يجب أن يكون مصادق عليه
+                        .requestMatchers("/auth/**").permitAll()  // Allow public access to /auth
+                        .requestMatchers("/users/**").hasAuthority("ADMIN")  // Restrict access to ADMIN role
+                        .anyRequest().authenticated()  // Authenticate other requests
                 )
-                .authenticationProvider(authenticationProvider)  // تحديد مزود المصادقة
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);  // إضافة الفلتر المخصص للمصادقة باستخدام JWT
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Stateless session
+                .authenticationProvider(authenticationProvider)  // Custom authentication provider
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);  // Add JWT filter
 
-
-        return http.build();  // بناء SecurityFilterChain
+        return http.build();
     }
+
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-
-        configuration.setAllowedOrigins(List.of("http://localhost:3004" ,"http://localhost:3006" ,"http://localhost:3007" ,"http://localhost:3008", "http://localhost:3003","http://localhost:3000","http://localhost:3005"));
-        configuration.setAllowedMethods(List.of("GET","POST"));
-        configuration.setAllowedHeaders(List.of("Authorization","Content-Type"));
+        configuration.setAllowedOrigins(List.of(
+                "http://localhost:3000",  // Add your frontend origin if needed
+                "http://localhost:3003",
+                "http://localhost:3004",
+                "http://localhost:3005",
+                "http://localhost:3006",
+                "http://localhost:3007",
+                "http://localhost:3008"
+        ));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setExposedHeaders(List.of("Authorization"));  // Allow frontend to access Authorization header
+        configuration.setAllowCredentials(true);  // Allow cookies and credentials
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-
-        source.registerCorsConfiguration("/**",configuration);
-
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-    /*@Bean
-
-}*/
 }

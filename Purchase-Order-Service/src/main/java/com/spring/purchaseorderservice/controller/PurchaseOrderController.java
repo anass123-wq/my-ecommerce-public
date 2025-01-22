@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -50,11 +49,6 @@ public class PurchaseOrderController {
 
         return new PurchaseOrderDto(order.getId(), order.getSupplier(), order.getTotalAmount(), order.getDate(), order.getPaymentStatus(), lineDtos);
     }
-    /*
-    @GetMapping("/{totalAmount}")
-    public PurchaseOrder getSalesOrderByTotalAmount(@PathVariable Double totalAmount){
-        return purchaseOrderService.getPurchaseOrderByTotalAmount(totalAmount);
-    }*/
     @GetMapping("/{date}")
     public PurchaseOrder getSalesOrderByDate(@PathVariable Date date){
         return purchaseOrderService.getPurchaseOrderByDate(date);
@@ -81,28 +75,11 @@ public class PurchaseOrderController {
     public List<PurchaseLine> getPurchaseLines(){
         return purchaseOrderService.getPurchaseLine();
     }
-    @DeleteMapping("/line/{id}")
-    public ResponseEntity<PurchaseLine> deleteSalesLine(@PathVariable Long id) {
-        PurchaseLine deletedPurchaseLine = purchaseOrderService.deleteSalesLine(id);
-        return ResponseEntity.ok(deletedPurchaseLine);
-    }
-    @PutMapping("/line/{id}")
-    public ResponseEntity<PurchaseLine> updateSalesLine(@PathVariable Long id, @RequestBody PurchaseLine lineDto) {
-        PurchaseLine updatedLine = purchaseOrderService.updatePurchaseLine(id, lineDto);
-        return ResponseEntity.ok(updatedLine);
-    }
-    /*
-    @GetMapping("/line/{id}/order")
-    public ResponseEntity<List<PurchaseOrder>> getPurchaseOrderBySalesLinePrice(@PathVariable double id) {
-        List<PurchaseOrder> purchaseOrder = purchaseOrderService.getPurchaseOrderBySalesLineAndPrice(id);
-        return ResponseEntity.ok(Collections.singletonList((PurchaseOrder) purchaseOrder));
-    }*/
-    @GetMapping("/line/{id}/lines")
-    public ResponseEntity<List<PurchaseLine>> getLinesByPurchaseOrderId(@PathVariable Integer id){
-        List<PurchaseLine> lines = purchaseOrderService.getLinesByPurchaseOrderId(id);
-        return (ResponseEntity< List< PurchaseLine > >) lines;
-    }
 
+    @GetMapping("/lines/order/{id}")
+    public List<PurchaseLine> getSalesLinesBySalesOrderId(@PathVariable("id") Long id){
+        return purchaseOrderService.getLinesByPurchaseOrderId(id);
+    }
 }
 
 

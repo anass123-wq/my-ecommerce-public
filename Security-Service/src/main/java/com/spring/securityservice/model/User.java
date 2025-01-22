@@ -43,7 +43,11 @@ import java.util.*;
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
-        @Override
+
+    public User(Integer id, String username, String roles) {
+    }
+
+    @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
             return List.of();
         }

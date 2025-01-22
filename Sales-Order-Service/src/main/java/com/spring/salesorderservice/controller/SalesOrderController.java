@@ -67,7 +67,23 @@ public class SalesOrderController {
     public SalesOrder updateSalesInvoice(@PathVariable Long id, @RequestBody SalesOrderDto salesOrderDto){
         return salesOrderService.updateSalesInvoice(id, salesOrderDto);
     }
-    /*
+
+    @GetMapping("/searchSalesOrder")
+    public ResponseEntity<List<SalesOrder>> searchSalesInvoices(@RequestParam String query) {
+        List<SalesOrder> results = salesOrderService.searchSalesInvoices(query);
+        return ResponseEntity.ok(results);
+    }
+
+    @GetMapping("/line/{id}/order")
+    public ResponseEntity<SalesOrder> getSalesOrderBySalesLineId(@PathVariable Long id) {
+        SalesOrder salesOrder = salesOrderService.getSalesOrderBySalesLineId(id);
+        return ResponseEntity.ok(salesOrder);
+    }
+    @GetMapping("/lines/order/{id}")
+    public List<SalesLine> getSalesLinesBySalesOrderId(@PathVariable("id") Long id){
+        return salesOrderService.getSalesLinesBySalesOrderId(id);
+    }
+}  /*
     @GetMapping("/by-payment-status")
     public SalesOrder getSalesOrderByPaymentStatus(@RequestParam PaymentStatus status) {
         return salesOrderService.getSalesOrderByPaymentStatus(status);
@@ -77,34 +93,3 @@ public class SalesOrderController {
     public SalesOrder getSalesOrderByDate(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date date) {
         return salesOrderService.getSalesOrderByDate(date);
     }*/
-    @GetMapping("/searchSalesOrder")
-    public ResponseEntity<List<SalesOrder>> searchSalesInvoices(@RequestParam String query) {
-        List<SalesOrder> results = salesOrderService.searchSalesInvoices(query);
-        return ResponseEntity.ok(results);
-    }
-    @PutMapping("/line/{id}")
-    public ResponseEntity<SalesLine> updateSalesLine(@PathVariable Long id, @RequestBody SalesLineDto salesLineDto) {
-        SalesLine updatedSalesLine = salesOrderService.updateSalesLine(id, salesLineDto);
-        return ResponseEntity.ok(updatedSalesLine);
-    }
-
-    @DeleteMapping("/line/{id}")
-    public ResponseEntity<SalesLine> deleteSalesLine(@PathVariable Long id) {
-        SalesLine deletedSalesLine = salesOrderService.deleteSalesLine(id);
-        return ResponseEntity.ok(deletedSalesLine);
-    }
-
-    @GetMapping("/line/{id}/order")
-    public ResponseEntity<SalesOrder> getSalesOrderBySalesLineId(@PathVariable Long id) {
-        SalesOrder salesOrder = salesOrderService.getSalesOrderBySalesLineId(id);
-        return ResponseEntity.ok(salesOrder);
-    }
-    @GetMapping("lines")
-    public List<SalesLine> getSalesLines() {
-        return salesOrderService.getSalesLines();
-    }
-    @GetMapping("/line/{id}/lines")
-    public  List<SalesLine>getSalesLinesBySalesOrderId(Long id) {
-        return salesOrderService.getSalesLinesBySalesOrderId(id);
-    }
-}
