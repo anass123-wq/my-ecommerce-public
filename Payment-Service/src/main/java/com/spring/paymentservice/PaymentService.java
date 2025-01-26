@@ -97,5 +97,11 @@ public class PaymentService {
         public List<Payment> getAllPayments() {
             return paymentRepository.findAll();
         }
-
+        public Payment getPaymentByOrderId(long orderId) {
+            Optional<Payment> payment = Optional.ofNullable(paymentRepository.findPaymentByOrderId(orderId));
+            if (payment.isPresent()){
+                return payment.get();
+            }
+            return null;
+        }
     }

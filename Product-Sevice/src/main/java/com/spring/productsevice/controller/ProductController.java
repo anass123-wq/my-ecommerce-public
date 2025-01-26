@@ -71,10 +71,8 @@ public class ProductController {
         return productService.findByCategoryContaining(category);
     }
     @GetMapping("/search/id")
-    public ResponseEntity<Product> searchById(@RequestParam Long id) {
-        return productService.findById(id)
-                .map(product -> ResponseEntity.ok(product))
-                .orElse(ResponseEntity.notFound().build());
+    public Product searchById(@RequestParam Long id) {
+        return productService.findById(id);
     }
 
     @GetMapping("/search/barcode")

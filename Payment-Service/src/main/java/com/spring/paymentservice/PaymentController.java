@@ -14,7 +14,7 @@ import java.util.List;
 @CrossOrigin(origins = {"http://localhost:3004" ,"http://localhost:3006" ,"http://localhost:3007" ,"http://localhost:3008", "http://localhost:3003","http://localhost:3000","http://localhost:3005"})
 @RestController
 @RequestMapping("/payment")
-public class controller {
+public class PaymentController {
     @Autowired
     private PaymentService paymentService;
     // POST: Add a new payment
@@ -46,6 +46,13 @@ public class controller {
     public ResponseEntity<List<Payment>> getAllPayments() {
         List<Payment> payments = paymentService.getAllPayments();
         return ResponseEntity.ok(payments);
+    }
+    @PostMapping("/update/ofFeign/{OrderId}")
+    public void updatePayment(@PathVariable Long OrderId, @RequestParam double amount, @RequestParam String status){
+        Payment payment= paymentService.getPaymentByOrderId(OrderId);
+        if (payment!=null&& status!=null){
+            paymentService.UpdatePayOrder(OrderId, amount, status);
+        }
     }
  /*  @PostMapping
     public Payment addPayment(@RequestParam PaymentDTO paymentDTO) {

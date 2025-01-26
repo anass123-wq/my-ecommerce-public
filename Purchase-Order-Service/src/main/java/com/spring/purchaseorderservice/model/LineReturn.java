@@ -16,6 +16,7 @@ public class LineReturn {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long orderId;
     private int quantity;
     private double price;
     private Long productId;

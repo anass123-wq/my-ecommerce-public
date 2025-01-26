@@ -38,4 +38,10 @@ public class SupplierClientService {
     public List<SupplierClient> searchSupplarClients(String query) {
         return clientRepository.searchByNameOrEmail(query);
     }
+    public void updateSupplierClient(Long id,SupplierClient supplierClient) {
+        SupplierClient oldClient = getSupplierClientById(id);
+        oldClient.setName(supplierClient.getName());
+        oldClient.setEmail(supplierClient.getEmail());
+        clientRepository.save(oldClient);
+    }
 }

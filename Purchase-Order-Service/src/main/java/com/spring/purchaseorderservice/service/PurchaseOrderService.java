@@ -78,12 +78,12 @@ public class PurchaseOrderService {
         purchaseOrderRepository.delete(purchaseOrder);
         return purchaseOrder;
     }
-    public PurchaseOrder updatePurchaseOrder(long id ,PurchaseOrderDto purchaseOrderDto) {
+    public PurchaseOrder updatePurchaseOrder(long id ,PurchaseOrderDto purchaseOrderDto) throws Exception {
         PurchaseOrder purchaseOrder = getPurchaseOrderById(id);
         purchaseOrder.setSupplier(purchaseOrderDto.getSupplier());
         if(purchaseOrderDto.getTotalAmount()!=purchaseOrder.getTotalAmount()){
             purchaseOrder.setTotalAmount(purchaseOrderDto.getTotalAmount());
-            feignPaiement.updatePayment(purchaseOrder.getTotalAmount());
+            feignPaiement.updatePayment(purchaseOrder.getId(),purchaseOrder.getTotalAmount(), String.valueOf(purchaseOrder.getPaymentStatus()));
         }
         purchaseOrder.setPaymentStatus(purchaseOrderDto.getPaymentStatus());
         purchaseOrder.setDate(purchaseOrderDto.getDate());

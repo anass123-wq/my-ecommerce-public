@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  eureka-server:
+    image: eureka-server
+    build:
+      context: ./eureka-server
+    ports:
+      - "8761:8761"
+
+  gateway-service:
+    image: gateway-service
+    build:
+      context: ./gateway-service
+    ports:
+      - "9055:9055"
+    depends_on:
+      - eureka-server
+
+  product-service:
+    image: product-service
+    build:
+      context: ./product-service
+    ports:
+      - "8031:8031"
+    environment:
+      - EUREKA_SERVER_URL=http://eureka-server:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/product-service-db
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    depends_on:
+      - eureka-server
+      - database
+
+  salesorder-service:
+    image: salesorder-service
+    build:
+      context: ./salesorder-service
+    ports:
+      - "8032:8032"
+    environment:
+      - EUREKA_SERVER_URL=http://eureka-server:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/salesorder-service-db
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    depends_on:
+      - eureka-server
+      - database
+
+  purchaseorder-service:
+    image: purchaseorder-service
+    build:
+      context: ./purchaseorder-service
+    ports:
+      - "8033:8033"
+    environment:
+      - EUREKA_SERVER_URL=http://eureka-server:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/purchaseorder-service-db
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    depends_on:
+      - eureka-server
+      - database
+
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD:
+      POSTGRES_DB:
+    ports:
+      - "3306:3306"
+    volumes:
+      - database-data:/var/lib/postgresql/data
+
+volumes:
+  database-data:

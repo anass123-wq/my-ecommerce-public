@@ -21,12 +21,12 @@ public class LineController {
     @Autowired
     private PurchaseOrderService purchaseOrderService;
     @DeleteMapping("/line/{id}")
-    public ResponseEntity<PurchaseLine> deleteSalesLine(@PathVariable Long id) {
-        PurchaseLine deletedPurchaseLine = lineService.deleteSalesLine(id);
+    public ResponseEntity<PurchaseLine> deletePurchaseLine(@PathVariable Long id) throws Exception {
+        PurchaseLine deletedPurchaseLine = lineService.deletePurchaseLine(id);
         return ResponseEntity.ok(deletedPurchaseLine);
     }
     @PutMapping("/line/{id}")
-    public ResponseEntity<PurchaseLine> updateSalesLine(@PathVariable Long id, @RequestBody PurchaseLineDto lineDto) {
+    public ResponseEntity<PurchaseLine> updatePurchaseLine(@PathVariable Long id, @RequestBody PurchaseLineDto lineDto) throws Exception {
         PurchaseLine updatedLine = lineService.updatePurchaseLine(id, lineDto);
         return ResponseEntity.ok(updatedLine);
     }

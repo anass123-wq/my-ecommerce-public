@@ -15,5 +15,6 @@ public interface FeignProductService {
     void updateDate(@PathVariable("id") Long id, @RequestParam("date") Date date);
     @PutMapping("/{productId}/reduceStock")
     void reduceStock(@PathVariable("productId") Long productId, @RequestParam("quantity") int quantity);
-
+    @PutMapping("/{id}/addStock")
+    void addStock(@PathVariable("id") Long id, @RequestParam("quantity") int quantity);
 }

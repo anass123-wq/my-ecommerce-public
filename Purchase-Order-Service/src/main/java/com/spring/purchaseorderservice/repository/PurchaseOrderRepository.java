@@ -16,7 +16,7 @@ public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, Lo
     PurchaseOrder findByDate(Date date);
     PurchaseOrder findByPurchaseLinesContaining(PurchaseLine purchaseLine);
     PurchaseOrder findByPaymentStatus(PaymentStatus paymentStatus);
-    @Query("SELECT pch FROM PurchaseOrder pch WHERE pch.totalAmount >= :amountPurch OR s.paymentStatus = :paymentStatus OR s.date = :date OR pch.supplier LIKE %:query%")
-    List<PurchaseOrder> searchPurchaseOrder(@Param("amountPurch") Double amountPurch,@Param("paymentStatus") PaymentStatus paymentStatus,@Param("date") Date date, @Param("query") String query);
+    @Query(value = "SELECT pch FROM PurchaseOrder pch WHERE pch.totalAmount >= :amountPurch OR pch.paymentStatus = :paymentStatus OR pch.date = :date OR pch.supplier LIKE %:query%")
+    List<PurchaseOrder> searchPurchaseOrder(@Param("amountPurch") Double amountPurch,@Param("paymentStatus")PaymentStatus paymentStatus,@Param("date") Date date, @Param("query") String query);
 
 }

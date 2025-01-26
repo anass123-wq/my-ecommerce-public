@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -66,8 +67,8 @@ public class ProductService {
         return productRepository.findByCategoryContaining(category);
     }
     // البحث عن المنتج بالـ ID
-    public Optional<Product> findById(Long id) {
-        return productRepository.findById(id);
+    public Product findById(Long id) {
+        return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(" product not found with id: " + id));
     }
 
     // البحث عن المنتج بالباركود
@@ -88,14 +89,17 @@ public class ProductService {
         return productRepository.findByQuantity(quantity);
     }
     public Product updateProduct(long id, Product product) {
-        Product product1 = productRepository.findById(id).get();
-        product1.setDescription(product.getDescription());
-        product1.setPrice(product.getPrice());
-        product1.setQuantity(product.getQuantity());
-        product1.setPriceInit(product.getPriceInit());
-        product1.setCategory(product.getCategory());
-        product1.setImage(product.getImage());
-        return productRepository.save(product);
+        Product existingProduct = productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found with id: " + id));
+
+        existingProduct.setDescription(product.getDescription());
+        existingProduct.setPrice(product.getPrice());
+        existingProduct.setQuantity(product.getQuantity());
+        existingProduct.setPriceInit(product.getPriceInit());
+        existingProduct.setCategory(product.getCategory());
+        existingProduct.setImage(product.getImage());
+        existingProduct.setDateLastModification(new Date()); // Optional: update modification date
+        return productRepository.save(existingProduct);
     }
 
     public List<Product> searchProducts(String query ) {

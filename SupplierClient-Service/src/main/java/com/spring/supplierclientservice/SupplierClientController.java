@@ -56,6 +56,12 @@ public class SupplierClientController {
         return ResponseEntity.ok(results
         );
     }
+    @PreAuthorize("hasAuthority({'UPDATE'})")
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateSupplierClient(@PathVariable("id") long id, @RequestBody SupplierClient supplierClient) {
+         clientSupplierService.updateSupplierClient(id,supplierClient);
+         return ResponseEntity.ok(supplierClient);
+    }
     @PutMapping("/SupplierClients/{name}")
     public ResponseEntity<?> updateTotalOrder(@PathVariable("name") String name, @RequestParam("totale") double totale, @RequestHeader("Source-Service")@RequestParam("sourceService") String sourceService,@RequestParam(value = "paymentStatus", required = false)String paymentStatus){
         Optional<SupplierClient> supplierClient = Optional.ofNullable(clientSupplierService.getSupplierClientByName(name));

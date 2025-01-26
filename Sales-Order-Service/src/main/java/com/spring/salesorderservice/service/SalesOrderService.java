@@ -85,7 +85,7 @@ public class SalesOrderService {
             salesOrder.get().setCustomer(salesOrderDto.getCustomer());
             if(salesOrderDto.getTotalAmount()!=salesOrder.get().getTotalAmount()){
                 salesOrder.get().setTotalAmount(salesOrderDto.getTotalAmount());
-                feignPaiement.updatePayment(salesOrder.get().getTotalAmount());
+                feignPaiement.updatePayment(salesOrder.get().getId(),salesOrder.get().getTotalAmount());
             }
             salesOrder.get().setPaymentStatus(salesOrderDto.getPaymentStatus());
             salesOrder.get().setDate(salesOrderDto.getDate());

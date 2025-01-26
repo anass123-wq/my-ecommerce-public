@@ -63,7 +63,7 @@ public class PurchaseOrderController {
     }
 
     @PutMapping("/update/{id}")
-    public PurchaseOrder updatePurchaseInvoice(@PathVariable Long id, @RequestBody PurchaseOrderDto purchaseOrderDto) {
+    public PurchaseOrder updatePurchaseInvoice(@PathVariable Long id, @RequestBody PurchaseOrderDto purchaseOrderDto) throws Exception {
         return purchaseOrderService.updatePurchaseOrder(id, purchaseOrderDto);
     }
     @GetMapping("/searchPurchaseOrder")

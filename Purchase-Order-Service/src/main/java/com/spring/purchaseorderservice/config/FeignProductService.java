@@ -14,9 +14,10 @@ import java.util.Map;
 @Component
 @FeignClient(name = "product-service", url = "http://localhost:8031/api/products")
 public interface FeignProductService {
-
     @PutMapping("/{id}/addStock")
     void addStock(@PathVariable("id") Long id, @RequestParam("quantity") int quantity);
+    @PutMapping("/{productId}/reduceStock")
+    void reduceStock(@PathVariable("productId") Long productId, @RequestParam("quantity") int quantity);
     @PutMapping("/{id}/updateDate")
-    void updateDate(@PathVariable("id") Long id, @RequestParam("date") /*@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)*/ Date date);
+    void updateDate(@PathVariable("id") Long id, @RequestParam("date")  Date date);
 }

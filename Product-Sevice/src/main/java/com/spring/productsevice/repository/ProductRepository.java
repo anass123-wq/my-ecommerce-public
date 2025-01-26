@@ -28,7 +28,3 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
      @Query("SELECT p FROM Product p WHERE p.name LIKE %:query% OR p.description LIKE %:query% OR p.price >= :amount OR p.category LIKE %:query% OR p.priceInit >= :amountInit ")
      List<Product> searchByNameOrDescriptionOrPrice(@Param("amount") Double amount,@Param("amountInit") Double amountInit, @Param("query") String query);
 }
-/* Product findByPrice(Long price);
-     Product findByQuantity(Long quantity)
-
-;*/
