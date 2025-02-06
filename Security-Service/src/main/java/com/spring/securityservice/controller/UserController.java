@@ -114,3 +114,26 @@ public class UserController {
         return permissionService.removeRoleFromUser(userId, roleId);
     }
 }
+/*@PreAuthorize("hasAuthority('ADMIN')")
+@CrossOrigin(origins = {"http://localhost:3004" ,"http://localhost:3006" ,"http://localhost:3007" ,"http://localhost:3008", "http://localhost:3003","http://localhost:3000","http://localhost:3005"})
+@RestController
+@RequestMapping("/users")
+@RequiredArgsConstructor
+public class UserController {        - id: r6
+          uri: lb://Security-Service
+          predicates:
+            - Path=/users/**
+  server:
+    tomcat:
+      relaxed-query-chars: "|{}[]"
+const API_URL = 'http://localhost:9055/users';
+
+const getAccounts = async () => {
+    try {
+        const response = await axiosInstance.get(API_URL);
+        return response.data;
+    } catch (error) {
+        // @ts-ignore
+        console.error("Error fetching users:", error.response ? error.response.data : error.message);
+    }
+};*/

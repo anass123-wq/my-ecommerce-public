@@ -2,6 +2,7 @@ package com.spring.supplierclientservice;
 
 import jakarta.ws.rs.HeaderParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -42,9 +43,15 @@ public class SupplierClientController {
         return clientSupplierService.getSupplierClientById(id);
     }
     @PreAuthorize("hasAuthority({'DELETE' , 'DELETE_SUPPLIERCLIENT'}) ")
-    @DeleteMapping("/Delete")
-    public SupplierClient deleteSupplierClient(@RequestBody long id){
-        return clientSupplierService.deleteSupplierClientById(id);
+    @DeleteMapping("/Delete/{id}")
+    public ResponseEntity<String> deleteSupplierClient(@PathVariable("id") long id) {
+        SupplierClient isDeleted = clientSupplierService.deleteSupplierClientById(id);
+
+        if (isDeleted!=null) {
+            return ResponseEntity.ok("SupplierClient with ID " + id + " deleted successfully.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("SupplierClient not found with ID: " + id);
+        }
     }
     @GetMapping("/{email}")
     public SupplierClient getSupplierClientByEmail(@PathVariable("email") String email){

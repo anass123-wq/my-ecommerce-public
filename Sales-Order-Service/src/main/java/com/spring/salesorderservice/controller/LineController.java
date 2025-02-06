@@ -14,7 +14,7 @@ import java.util.List;
 //@CrossOrigin(origins = {"http://localhost:3004" ,"http://localhost:3006" ,"http://localhost:3007" ,"http://localhost:3008", "http://localhost:3003","http://localhost:3000","http://localhost:3005"})
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/line")
+@RequestMapping("/line/sales")
 public class LineController {
     @Autowired
     private LineService lineService;
@@ -23,7 +23,7 @@ public class LineController {
         SalesLine updatedSalesLine = lineService.updateSalesLine(id, salesLineDto);
         return ResponseEntity.ok(updatedSalesLine);
     }
-    @GetMapping("lines")
+    @GetMapping()
     public List<SalesLine> getSalesLines() {
         return lineService.getSalesLines();
     }

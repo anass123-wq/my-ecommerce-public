@@ -80,6 +80,10 @@ public class PurchaseOrderController {
     public List<PurchaseLine> getSalesLinesBySalesOrderId(@PathVariable("id") Long id){
         return purchaseOrderService.getLinesByPurchaseOrderId(id);
     }
+    @GetMapping("/line/{id}/order")
+    public PurchaseOrder getPurchaseOrderByPurchaseLineId(@PathVariable("id") Long id){
+        return purchaseOrderService.getPurchaseOrderByPurchaseLineId(id);
+    }
 }
 
 

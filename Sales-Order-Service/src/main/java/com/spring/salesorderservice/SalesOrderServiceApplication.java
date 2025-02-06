@@ -15,7 +15,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-@EnableWebSocketMessageBroker
+//@EnableWebSocketMessageBroker
 public class SalesOrderServiceApplication {
 
     public static void main(String[] args) {

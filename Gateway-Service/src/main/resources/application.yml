@@ -1,33 +1,37 @@
 spring:
+  main:
+      web-application-type: reactive
   cloud:
     gateway:
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
-      corsConfigurations:
-        '[/**]':
-          allowedOrigins: "*"
-          allowedMethods:
-            - GET
-            - POST
-            - PUT
-            - DELETE
-            - OPTIONS
-          allowedHeaders:
-            - "*"
-          allowCredentials: true
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3003"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
       routes:
         - id: r1
           uri: lb://Product-Service
           predicates:
-            - Path=/api/products/**, *
+            - Path=/api/products/**
         - id: r2
           uri: lb://Sales-Order-Service
           predicates:
             - Path=/sales/**
+         #   - Path=/sales/**|/line/sales/**|/lineReturn/sales/**
         - id: r3
           uri: lb://Purchase-Order-Service
           predicates:
             - Path=/purchases/**
+         #   - Path=/purchases/**|/line/purchases/**|/lineReturn/purchases/**
         - id: r4
           uri: lb://SupplierClient-Service
           predicates:
@@ -40,6 +44,22 @@ spring:
           uri: lb://Security-Service
           predicates:
             - Path=/users/**
+        - id: r6
+          uri: lb://Purchase-Order-Service
+          predicates:
+            - Path=/line/purchases/**
+        - id: r7
+          uri: lb://Purchase-Order-Service
+          predicates:
+            - Path=/lineReturn/purchases/**
+        - id: r8
+          uri: lb://Sales-Order-Service
+          predicates:
+            - Path=/line/sales/**
+        - id: r9
+          uri: lb://Sales-Order-Service
+          predicates:
+            - Path=/lineReturn/sales/**
   server:
     tomcat:
       relaxed-query-chars: "|{}[]"

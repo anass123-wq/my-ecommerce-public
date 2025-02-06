@@ -12,7 +12,7 @@ import java.util.List;
 @PreAuthorize("hasAuthority('ADMIN')")
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/lineReturn")
+@RequestMapping("/lineReturn/purchases")
 public class ReturnController {
     @Autowired
     private ReturnService returnService;

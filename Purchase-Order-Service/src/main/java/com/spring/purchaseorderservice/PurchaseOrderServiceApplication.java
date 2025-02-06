@@ -10,7 +10,6 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-@EnableWebSocketMessageBroker
 public class PurchaseOrderServiceApplication {
 
     public static void main(String[] args) {

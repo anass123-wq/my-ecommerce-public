@@ -14,7 +14,7 @@ import java.util.List;
 @PreAuthorize("hasAuthority('ADMIN')")
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/line")
+@RequestMapping("/line/purchases")
 public class LineController {
     @Autowired
     private LineService lineService;
